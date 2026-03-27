@@ -1,0 +1,27 @@
+﻿<div class="container mt-5" style="max-width:400px;">
+    <h3>Create Teacher Account</h3>
+
+    <form method="post">
+        <div class="mb-3">
+            <label>Username</label>
+            <input type="text" class="form-control" name="username" required />
+        </div>
+
+        <div class="mb-3">
+            <label>Password</label>
+            <input type="password" class="form-control" name="password" required />
+        </div>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">@ViewBag.Error</div>
+        }
+
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success">@ViewBag.Success</div>
+        }
+
+        <button class="btn btn-primary w-100">Create Teacher</button>
+    </form>
+</div>

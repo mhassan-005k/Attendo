@@ -1,0 +1,33 @@
+﻿@model List<AttendanceApp.Controllers.AttendanceSummary>
+
+<div class="container mt-5">
+    <h3 class="mb-4">Teacher Dashboard</h3>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Class Name</th>
+                <th>Date</th>
+                <th>Total Students</th>
+                <th>Excel</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ClassName</td>
+                    <td>@item.Date.ToString("yyyy-MM-dd")</td>
+                    <td>@item.Total</td>
+                    <td>
+                        <a class="btn btn-success btn-sm"
+                           href="/Teacher/DownloadExcel?classId=@item.ClassId&date=@item.Date.ToString("yyyy-MM-dd")">
+                            Download
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

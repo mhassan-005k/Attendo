@@ -1,0 +1,36 @@
+﻿@model AttendanceApp.Models.StudentJoinViewModel
+
+<div class="container mt-5" style="max-width:600px;">
+    <h3 class="mb-4 text-center">Join Your Online Class</h3>
+
+    <form class="card shadow p-4" method="post">
+
+        <div class="mb-3">
+            <label>Select Class</label>
+            <select class="form-select" name="ClassId" required>
+                <option>-- Select --</option>
+                @foreach (var c in ViewBag.Classes)
+                {
+                    <option value="@c.ClassId">@c.ClassName</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label>Name</label>
+            <input class="form-control" name="Name" required />
+        </div>
+
+        <div class="mb-3">
+            <label>CMS ID</label>
+            <input class="form-control" name="CMS_ID" required />
+        </div>
+
+        <div class="mb-3">
+            <label>Email</label>
+            <input class="form-control" name="Email" type="email" required />
+        </div>
+
+        <button class="btn btn-success w-100">Join Class</button>
+    </form>
+</div>

@@ -1,0 +1,17 @@
+﻿@model AttendanceApp.Models.Class
+
+<h2>Create New Class</h2>
+
+<form asp-action="CreateClass" method="post">
+    <div class="mb-3">
+        <label>Class Name</label>
+        <input asp-for="ClassName" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label>Zoom Link</label>
+        <input asp-for="ZoomLink" class="form-control" required />
+    </div>
+
+    <button class="btn btn-primary">Save</button>
+</form>

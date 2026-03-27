@@ -1,0 +1,17 @@
+﻿<div class="container mt-5" style="max-width:400px;">
+    <h3>Admin Login</h3>
+
+    <form method="post">
+        <div class="mb-3">
+            <label>Admin Password</label>
+            <input type="password" class="form-control" name="password" required />
+        </div>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">@ViewBag.Error</div>
+        }
+
+        <button class="btn btn-primary w-100">Login</button>
+    </form>
+</div>
