@@ -9,5 +9,6 @@
         public string ZoomLink { get; set; }
 
         public bool IsActive { get; set; } = true;
+        public int TeacherId { get; set; }
     }
 }

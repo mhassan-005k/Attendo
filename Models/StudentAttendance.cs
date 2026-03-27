@@ -16,5 +16,6 @@
         public DateTime JoinTime { get; set; }
 
         public int JoinCount { get; set; }
+        public int TeacherId { get; set; }
     }
 }

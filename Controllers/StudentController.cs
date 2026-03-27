@@ -35,6 +35,7 @@ namespace AttendanceApp.Controllers
                 if (student == null)
                 {
                     var pakTime = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.UtcNow, "Pakistan Standard Time");
+                     var teacherId = HttpContext.Session.GetInt32("TeacherId");
 
                 student = new StudentAttendance
                     {
@@ -45,8 +46,9 @@ namespace AttendanceApp.Controllers
                         JoinDate = today,
                         //JoinTime = DateTime.Now,
                         JoinTime = pakTime,
-                        JoinCount = 1
-                    };
+                        JoinCount = 1,
+                        TeacherId = teacherId.Value
+                };
 
                     _context.StudentAttendance.Add(student);
                     _context.SaveChanges();

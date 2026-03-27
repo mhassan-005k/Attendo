@@ -28,7 +28,21 @@ namespace AttendanceApp.Controllers
             if (!LoggedIn())
                 return RedirectToAction("Login", "Auth");
 
+            //var data = _context.StudentAttendance
+            //    .GroupBy(a => new { a.ClassId, a.JoinDate })
+            //    .Select(g => new AttendanceSummary
+            //    {
+            //        ClassId = g.Key.ClassId,
+            //        ClassName = _context.Classes.First(c => c.ClassId == g.Key.ClassId).ClassName,
+            //        Date = g.Key.JoinDate,
+            //        Total = g.Count()
+            //    })
+            //    .OrderByDescending(x => x.Date)
+            //    .ToList();
+            int teacherId = HttpContext.Session.GetInt32("TeacherId").Value;
             var data = _context.StudentAttendance
+                .Where(a => _context.Classes
+                .Any(c => c.ClassId == a.ClassId && c.TeacherId == teacherId))
                 .GroupBy(a => new { a.ClassId, a.JoinDate })
                 .Select(g => new AttendanceSummary
                 {
@@ -39,6 +53,13 @@ namespace AttendanceApp.Controllers
                 })
                 .OrderByDescending(x => x.Date)
                 .ToList();
+
+            // Get classes for this teacher (for Edit buttons)
+            var classes = _context.Classes
+                .Where(c => c.TeacherId == teacherId)
+                .ToList();
+
+            ViewBag.Classes = classes;
 
             return View(data);
         }
@@ -64,7 +85,8 @@ namespace AttendanceApp.Controllers
             if (!LoggedIn())
                 return RedirectToAction("Login", "Auth");
 
-            return View();
+            //var model = new Class();
+            return View(new Class());
         }
 
         [HttpPost]
@@ -73,11 +95,96 @@ namespace AttendanceApp.Controllers
             if (!LoggedIn())
                 return RedirectToAction("Login", "Auth");
 
-            model.IsActive = true;
-            _context.Classes.Add(model);
+            var teacherId = HttpContext.Session.GetInt32("TeacherId");
+            if (model.ClassId == 0)
+            {
+
+                model.TeacherId = teacherId.Value;   //Set TeacherId here
+
+                model.IsActive = true;
+                _context.Classes.Add(model);
+            }
+            else
+            {
+                var cls = _context.Classes.FirstOrDefault(c => c.ClassId == model.ClassId && c.TeacherId == teacherId);
+                if (cls == null)
+                    return NotFound();
+                cls.ClassName = model.ClassName;
+                cls.ZoomLink = model.ZoomLink;
+            }
+
+            _context.SaveChanges();
+            return RedirectToAction("Dashboard");
+        }
+
+        public IActionResult EditClass(int id)
+        {
+            if (!LoggedIn())
+                return RedirectToAction("Login", "Auth");
+
+            var teacherId = HttpContext.Session.GetInt32("TeacherId");
+
+            var cls = _context.Classes
+                .FirstOrDefault(c => c.ClassId == id && c.TeacherId == teacherId);
+
+            if (cls == null)
+                return NotFound();
+
+            return View("CreateClass", cls);  // ← Load same page
+        }
+
+        public IActionResult DeleteClass(int id)
+        {
+            if (!LoggedIn())
+                return RedirectToAction("Login", "Auth");
+
+            var teacherId = HttpContext.Session.GetInt32("TeacherId");
+
+            var cls = _context.Classes
+                .FirstOrDefault(c => c.ClassId == id && c.TeacherId == teacherId);
+
+            if (cls == null)
+                return NotFound();
+
+            // Option 1: Delete class but keep attendance
+            _context.Classes.Remove(cls);
             _context.SaveChanges();
 
+            // Option 2 (safer): just mark it inactive
+            // cls.IsActive = false;
+            // _context.SaveChanges();
+
             return RedirectToAction("Dashboard");
+        }
+
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("TeacherId");   // Remove teacher session
+            return RedirectToAction("Login", "Auth");   // Redirect to login page
+        }
+        public IActionResult History()
+        {
+            if (!LoggedIn())
+                return RedirectToAction("Login", "Auth");
+
+            var teacherId = HttpContext.Session.GetInt32("TeacherId");
+
+            var data = _context.StudentAttendance
+                .Where(x => x.TeacherId == teacherId)
+                .GroupBy(a => new { a.ClassId, a.JoinDate })
+                .Select(g => new AttendanceSummary
+                {
+                    ClassId = g.Key.ClassId,
+                    ClassName = _context.Classes
+                                .First(c => c.ClassId == g.Key.ClassId).ClassName,
+                    Date = g.Key.JoinDate,
+                    Total = g.Count()
+                })
+                .OrderByDescending(x => x.Date)
+                .ToList();
+
+            return View(data);
         }
 
         // GET: Admin Login
