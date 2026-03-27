@@ -39,7 +39,7 @@ A simple **online class attendance tracking system** built with **ASP.NET Core M
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/mhassan-005k/AttendanceApp.git
+git clone https://github.com/mhassan-005k/Attendo.git
 cd AttendanceApp
 ```
 
