@@ -9,9 +9,14 @@
     </div>
 
     <div class="mb-3">
-        <label>Zoom Link</label>
+        <label>Class Link</label>
         <input asp-for="ZoomLink" class="form-control" required />
     </div>
 
     <button class="btn btn-primary">Save</button>
+    <div class="text-center mt-3">
+        <a asp-controller="Teacher" asp-action="Dashboard" class="text-decoration-none text-muted">
+            Go back to dashboard
+        </a>
+    </div>
 </form>
