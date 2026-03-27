@@ -34,14 +34,17 @@ namespace AttendanceApp.Controllers
 
                 if (student == null)
                 {
-                    student = new StudentAttendance
+                    var pakTime = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.UtcNow, "Pakistan Standard Time");
+
+                student = new StudentAttendance
                     {
                         ClassId = vm.ClassId,
                         Name = vm.Name,
                         CMS_ID = vm.CMS_ID,
                         Email = vm.Email,
                         JoinDate = today,
-                        JoinTime = DateTime.Now,
+                        //JoinTime = DateTime.Now,
+                        JoinTime = pakTime,
                         JoinCount = 1
                     };
 
