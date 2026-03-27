@@ -8,7 +8,7 @@
         <div class="mb-3">
             <label>Select Class</label>
             <select class="form-select" name="ClassId" required>
-                <option>-- Select --</option>
+                <option value="">-- Select --</option>
                 @foreach (var c in ViewBag.Classes)
                 {
                     <option value="@c.ClassId">@c.ClassName</option>
