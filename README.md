@@ -26,7 +26,7 @@ A simple **online class attendance tracking system** built with **ASP.NET Core M
 
 ## 🔹 Tech Stack
 
-* **Backend:** ASP.NET Core MVC (.NET 7)
+* **Backend:** ASP.NET Core MVC (.NET 8)
 * **Database:** Entity Framework Core (SQL Server)
 * **Frontend:** Razor Pages with Bootstrap 5
 * **Password Security:** BCrypt.Net
@@ -39,8 +39,8 @@ A simple **online class attendance tracking system** built with **ASP.NET Core M
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/mhassan-005k/AttendanceApp.git
-cd AttendanceApp
+git clone https://github.com/mhassan-005k/Attendo.git
+cd Attendo
 ```
 
 2. **Update Connection String** in `appsettings.json`
