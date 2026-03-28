@@ -23,7 +23,8 @@
 
         <div class="mb-3">
             <label>CMS ID</label>
-            <input class="form-control" name="CMS_ID" required />
+            <input class="form-control" name="CMS_ID" required pattern="^\d{4}-\d{4}$"
+                placeholder="0000-0000" />
         </div>
 
         <div class="mb-3">

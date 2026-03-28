@@ -55,6 +55,7 @@ namespace AttendanceApp.Controllers
                 }
                 else
                 {
+                    //if (student.JoinCount >= 8)
                     if (student.JoinCount >= 4)
                     {
                         return Content("❌ You exceeded allowed reconnect attempts for today.");
