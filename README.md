@@ -96,6 +96,19 @@ dotnet run
 
 ---
 
+🚀 Attendo: Community vs. Professional Version
+
+Feature,Community (Open Source),Professional (Enterprise)
+Attendance Tracking,Basic List,Advanced Analytics
+Identity Verification,CMS ID Input,Cryptographic Identity Locking
+Fraud Prevention,Reconnect Limits,Hardware Fingerprinting
+Anti-Proxy Shield,❌,Shared-Device Cooldown Logic
+Zoom Integration,Web Redirect,Native Deep-Link Protocol
+Reporting,Standard Excel,Forensic Audit (Auto-Flagging)
+Global Controls,Fixed Settings,Admin Dashboard & API Access
+
+Interested in the Professional Suite? If your institution requires verified attendance and anti-cheat protocols, feel free to reach out for a demo of the Pro Security Layer.
+
 ## 🔹 Future Enhancements
 
 * Email notifications to teachers on new attendance.
